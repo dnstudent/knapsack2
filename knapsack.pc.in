@@ -1,0 +1,7 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
+includedir=${prefix}/include
+
+Name: knapsack
+Description: knapsack is a C++ library.
+Version: 1.0
