@@ -4,9 +4,10 @@
 
 #include <gtest/gtest.h>
 #include <knapsack/simple/recursive.hpp>
+#include <knapsack/simple/dynamic.hpp>
 
 using Value = uint;
-using Weight = uint;
+using Weight = size_t;
 using Items = knapsack::Items<Value, Weight>;
 
 //static const std::vector<Items> items{
@@ -28,9 +29,29 @@ const Items testing_items{{1, 2, 3},
 
 TEST(SIMPLE, Recursive) {
     bool all = std::all_of(testing_tuples.begin(), testing_tuples.end(),
-                   [](const auto tuple) {
-                       return knapsack::simple::recursive::best_value(std::get<1>(tuple),
-                                                                      std::get<0>(tuple)) == std::get<2>(tuple);
-                   });
+                           [](const auto tuple) {
+                               return knapsack::simple::recursive::best_value(std::get<1>(tuple),
+                                                                              std::get<0>(tuple)) == std::get<2>(tuple);
+                           });
+    ASSERT_TRUE(all);
+}
+
+TEST(SIMPLE, DynamicSpace) {
+    bool all = std::all_of(testing_tuples.begin(), testing_tuples.end(),
+                           [](const auto tuple) {
+                               return knapsack::simple::dynamic::best_value_space(std::get<1>(tuple),
+                                                                                  std::get<0>(tuple)) ==
+                                      std::get<2>(tuple);
+                           });
+    ASSERT_TRUE(all);
+}
+
+TEST(SIMPLE, DynamicCycles) {
+    bool all = std::all_of(testing_tuples.begin(), testing_tuples.end(),
+                           [](const auto tuple) {
+                               return knapsack::simple::dynamic::best_value_cycles(std::get<1>(tuple),
+                                                                                   std::get<0>(tuple)) ==
+                                      std::get<2>(tuple);
+                           });
     ASSERT_TRUE(all);
 }

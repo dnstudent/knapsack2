@@ -6,16 +6,16 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(KNAPSACK_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/)
-set(KNAPSACK_HEADERS
-    ${KNAPSACK_INCLUDE_DIR}/knapsack/definitions.hpp
-        ${KNAPSACK_INCLUDE_DIR}/knapsack/simple/recursive.hpp
-        ${KNAPSACK_INCLUDE_DIR}/knapsack/simple/dynamic.hpp)
+#set(KNAPSACK_HEADERS
+#    ${KNAPSACK_INCLUDE_DIR}/knapsack/definitions.hpp
+#    ${KNAPSACK_INCLUDE_DIR}/knapsack/simple/recursive.hpp
+#    ${KNAPSACK_INCLUDE_DIR}/knapsack/simple/dynamic.hpp)
 
 add_library(knapsack INTERFACE)
 
-target_sources(knapsack INTERFACE ${KNAPSACK_HEADERS})
+#target_sources(knapsack INTERFACE ${KNAPSACK_HEADERS})
 target_include_directories(knapsack INTERFACE ${KNAPSACK_INCLUDE_DIR})
-target_compile_options(knapsack INTERFACE -Werror -Wall -Wextra)
+target_compile_options(knapsack INTERFACE -Wall -Wextra)
 
 set(BUILD_TESTS ON)
 enable_testing()
@@ -25,6 +25,8 @@ add_subdirectory(test)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
+
+set(CMAKE_OSX_ARCHITECTURES "arm64")
 
 install(TARGETS knapsack EXPORT ${PROJECT_NAME}-targets)
 export(EXPORT ${PROJECT_NAME}-targets FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
