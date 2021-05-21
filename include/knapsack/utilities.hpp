@@ -15,8 +15,7 @@ namespace knapsack {
         const auto filled_to = std::fill_n(begin,
                                            std::min(capacity, weight),
                                            static_cast<Value>(0));
-        const auto end = std::next(begin, capacity+1);
-        std::fill(filled_to, end, static_cast<Value>(value));
+        std::fill(filled_to, std::next(begin, capacity+1), static_cast<Value>(value));
     }
 }
 

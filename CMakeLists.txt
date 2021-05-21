@@ -20,13 +20,11 @@ target_compile_options(knapsack INTERFACE -Wall -Wextra)
 set(BUILD_TESTS ON)
 enable_testing()
 add_subdirectory(test)
-#add_subdirectory(benchmark)
+add_subdirectory(benchmark)
 
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
-
-set(CMAKE_OSX_ARCHITECTURES "arm64")
 
 install(TARGETS knapsack EXPORT ${PROJECT_NAME}-targets)
 export(EXPORT ${PROJECT_NAME}-targets FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
